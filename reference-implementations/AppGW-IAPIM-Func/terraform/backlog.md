@@ -1,7 +1,9 @@
 # Todos
-- key vault module
+
 - apim module (AN)
-  - Don't set to internal mode
-  - Look at bicep for referernce
+  - Hello world done
+  - Switch to internal mode
+  - Cleanup
+  - Look at bicep for ref
 - gateway module (Pete)
 - port functions

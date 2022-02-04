@@ -3,10 +3,10 @@ locals {
   apim_cs_vnet_name                 = "vnet-apim-cs-${var.workload_name}-${var.deployment_environment}-${var.resource_group_location}"
   bastion_subnet_name               = "AzureBastionSubnet"
   devops_subnet_name                = "snet-devops-${var.workload_name}-${var.deployment_environment}-${var.resource_group_location}"
-  jumpbox_subnet_name                = "snet-jbox-${var.workload_name}-${var.deployment_environment}-${var.resource_group_location}-001"
+  jumpbox_subnet_name               = "snet-jbox-${var.workload_name}-${var.deployment_environment}-${var.resource_group_location}-001"
   appgateway_subnet_name            = "snet-apgw-${var.workload_name}-${var.deployment_environment}-${var.resource_group_location}-001"
   private_endpoint_subnet_name      = "snet-prep-${var.workload_name}-${var.deployment_environment}-${var.resource_group_location}-001"
-  backend_subnet_name                = "snet-bcke-${var.workload_name}-${var.deployment_environment}-${var.resource_group_location}-001"
+  backend_subnet_name               = "snet-bcke-${var.workload_name}-${var.deployment_environment}-${var.resource_group_location}-001"
   apim_subnet_name                  = "snet-apim-${var.workload_name}-${var.deployment_environment}-${var.resource_group_location}-001"
   bastion_name                      = "bastion-${var.workload_name}-${var.deployment_environment}-${var.resource_group_location}"
   bastion_ip_configName             = "bastionipcfg-${var.workload_name}-${var.deployment_environment}-${var.resource_group_location}"
@@ -29,7 +29,7 @@ resource "azurerm_virtual_network" "apim_cs_vnet" {
   address_space       = [var.apim_cs_vnet_name_address_prefix]
   //enableVmProtection: false
   //ddos_protection_plan false
-  
+
   subnet {
     name           = local.bastion_subnet_name
     address_prefix = var.bastion_address_prefix
@@ -405,7 +405,7 @@ resource "azurerm_bastion_host" "bastion_host" {
 
   ip_configuration {
     //privateIPAllocationMethod: 'Dynamic'
-    name                 = local.bastion_ip_configName    
+    name                 = local.bastion_ip_configName
     public_ip_address_id = azurerm_public_ip.bastion_public_ip.id
     subnet_id            = "${azurerm_virtual_network.apim_cs_vnet.id}/subnets/${local.bastion_subnet_name}"
   }
